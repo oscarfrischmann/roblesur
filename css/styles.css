@@ -38,6 +38,11 @@ figure {
 .show {
   display: none;
 }
+
+.alert {
+  background-color: antiquewhite;
+  padding: 10px;
+}
 .swal2-title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

@@ -82,6 +82,8 @@ onAuthStateChanged(auth, (user) => {
   if (user != null) {
     console.log("User Logged In");
     console.log(user);
+    const showModalForm = document.getElementById("alertContainer");
+    showModalForm.classList.toggle("show");
     getMessages(db);
   } else {
     console.log("No User Logged In");
@@ -92,7 +94,6 @@ onAuthStateChanged(auth, (user) => {
 const msgContainer = document.getElementById("messages");
 let allMessagesInDB;
 async function getMessages(db) {
-  modal.classList.toggle("show");
   try {
     const mensajes = collection(db, "contacto");
 
@@ -167,3 +168,38 @@ getData.addEventListener("click", () => {
 function deleteMsg(tg) {
   deleteDoc(doc(db, "contacto", tg));
 }
+const manageModal = document.getElementById("alert");
+
+const show = document.getElementById("show");
+let showModal = false;
+show.addEventListener("click", () => {
+  if (show.checked) {
+    showModal = true;
+    console.log(showModal);
+  } else {
+    showModal = false;
+  }
+});
+const changeModal = async (event) => {
+  console.log("hi");
+  event.preventDefault();
+  console.log(show);
+  const tittle = manageModal["tittle"].value;
+  const description = manageModal["text"].value;
+  const thumbnail = manageModal["thumbnail"].value;
+  const button = manageModal["button"].value;
+
+  console.log(tittle, description, thumbnail, button, showModal);
+  try {
+    await setDoc(doc(db, "modal_index", "modal_index"), {
+      tittle: tittle,
+      description: description,
+      thumbnail: thumbnail,
+      button: button,
+      show: showModal,
+    });
+  } catch (err) {
+    throw new Error("bla bla", err);
+  }
+};
+manageModal.addEventListener("submit", changeModal);

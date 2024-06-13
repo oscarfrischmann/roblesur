@@ -21,6 +21,22 @@
         ver mensajes
       </button>
     </div>
+    <div class="alert show" id="alertContainer">
+      <form id="alert">
+        Titulo:
+        <input type="text" id="tittle" name="tittle" required /><br />
+        Texto:
+        <input type="text" id="description" name="text" required /><br />
+        Imagen:
+        <input type="text" id="thumbnail" name="thumbnail" required /><br />
+        texto del boton:
+        <input type="text" id="button" name="button" required /><br />
+        Se muestra?
+        <input type="checkbox" id="show" name="show" /><br />
+
+        <button type="submit" class="realtime__btn">Enviar</button>
+      </form>
+    </div>
     <div id="messages"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>

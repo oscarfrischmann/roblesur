@@ -34,9 +34,10 @@ console.log("modal on");
       sweetalert2.fire({
         title: modalData.tittle.stringValue,
         text: modalData.text.stringValue,
-        confirmButtonText: "Cool",
+        confirmButtonText: modalData.confirmButtonText.stringValue,
         imageUrl: modalData.thumbnail.stringValue,
         imageWidth: "90%",
+        backdrop: true,
       });
     }
   } catch (err) {

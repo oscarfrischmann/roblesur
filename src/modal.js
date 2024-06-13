@@ -20,6 +20,7 @@ const firebaseConfig = initializeApp({
 import sweetalert2 from "https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/+esm";
 
 const db = getFirestore(firebaseConfig);
+let alert = document.getElementById("alert");
 console.log("modal on");
 
 (async function getModal() {
@@ -32,7 +33,7 @@ console.log("modal on");
       const modal = document.getElementById("modal");
       console.log(modal);
       sweetalert2.fire({
-        title: modalData.tittle.stringValue,
+        titleText: modalData.tittle.stringValue,
         text: modalData.text.stringValue,
         confirmButtonText: modalData.confirmButtonText.stringValue,
         imageUrl: modalData.thumbnail.stringValue,
@@ -44,3 +45,27 @@ console.log("modal on");
     throw new Error(err);
   }
 })();
+
+const changeModal = async (event) => {
+  await event.preventDefault();
+  console.log("hi");
+  try {
+    const tittle = alert["tittle"].value;
+    const description = alert["text"].value;
+    const thumbnail = alert["thumbnail"].value;
+    const button = alert["button"].value;
+    const show = alert["stock"].value;
+    console.log(tittle, description, thumbnail, button, show);
+    await setDoc(doc(db, "modal_index", "modal_index"), {
+      tittle: tittle,
+      description: description,
+      thumbnail: thumbnail,
+      button: button,
+      show: show,
+    });
+  } catch (err) {
+    throw new Error("bla bla", err);
+  }
+  console.log(newModal);
+};
+alert.addEventListener("submit", changeModal());

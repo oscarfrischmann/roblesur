@@ -35,6 +35,12 @@ p {
 figure {
   margin: 0;
 }
+.show {
+  display: none;
+}
+.swal2-title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .subtitulo__secundario {
   text-align: center;
@@ -54,7 +60,8 @@ figure {
   font-size: 1.2rem;
 }
 
-.box-shadow, .galeria img {
+.box-shadow,
+.galeria img {
   box-shadow: 2px 2px 5px;
 }
 
@@ -678,7 +685,7 @@ figure {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    grid-column: 2/span 2;
+    grid-column: 2 / span 2;
     grid-row: 1/2;
   }
   .hosteria__parrafo {
@@ -803,12 +810,13 @@ figure {
   height: 40px;
   width: 100%;
 }
-.reservas__botones, .reservas__checkbox {
+.reservas__botones,
+.reservas__checkbox {
   align-self: flex-end;
 }
 .reservas .boton {
   padding: 5px 8px;
-  background-color: #007BFF;
+  background-color: #007bff;
   border: none;
   font-weight: 600;
   color: aliceblue;

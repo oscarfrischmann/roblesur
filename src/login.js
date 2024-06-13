@@ -29,7 +29,6 @@ const firebaseConfig = initializeApp({
 const auth = getAuth(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(firebaseConfig);
-
 // SIGN IN GOOGLE
 const signInButton = document.getElementById("googleLogIn");
 signInButton.addEventListener("click", () => {
@@ -71,6 +70,7 @@ signOutButton.addEventListener("click", () => {
     .then(() => {
       console.log("Signed Out succesfully");
       console.log(getMessages(db));
+      location.reload();
     })
     .catch((error) => {
       console.log("We couldn´t sign you Out", error);
@@ -92,6 +92,7 @@ onAuthStateChanged(auth, (user) => {
 const msgContainer = document.getElementById("messages");
 let allMessagesInDB;
 async function getMessages(db) {
+  modal.classList.toggle("show");
   try {
     const mensajes = collection(db, "contacto");
 

@@ -36,13 +36,18 @@ figure {
   margin: 0;
 }
 .show {
-  display: none;
+  display: none !important;
 }
 
 .alert {
   display: flex;
   justify-content: center;
-  background-color: antiquewhite;
+  background: rgb(61, 61, 61);
+  background: linear-gradient(
+    0deg,
+    rgba(61, 61, 61, 1) 0%,
+    rgba(250, 235, 215, 1) 100%
+  );
   padding: 10px;
 }
 
@@ -67,6 +72,9 @@ figure {
 }
 #alert button:active {
   box-shadow: 1px 1px 1px;
+}
+#alert button:hover {
+  background-color: rgb(152, 234, 152);
 }
 #alert input {
   margin-bottom: -15px;
@@ -470,9 +478,17 @@ figure {
   padding: 10px;
   width: 90%;
 }
+
 .login .msgContainer span {
   color: antiquewhite;
   font-size: 1.2rem;
+}
+.login .msgContainer span:nth-of-type(1) {
+  /* place-self: end; */
+  background-color: antiquewhite;
+  color: rgba(0, 0, 0, 0.7607843137);
+  padding: 5px;
+  border-radius: 10px;
 }
 .login .msgContainer button {
   background-color: #007bff;

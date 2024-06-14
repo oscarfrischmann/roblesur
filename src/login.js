@@ -25,6 +25,10 @@ const firebaseConfig = initializeApp({
   appId: "1:587587113540:web:98f34cdf522d748b9ce211",
 });
 
+let dateTime = luxon.DateTime;
+const now = dateTime.now().setZone("America/Buenos_Aires").toISO();
+console.log(now);
+console.log(dateTime.fromISO(now));
 // Initialize Firebase
 const auth = getAuth(firebaseConfig);
 const provider = new GoogleAuthProvider();
@@ -102,6 +106,9 @@ async function getMessages(db) {
     allMessagesInDB = mensajesSnapshot.docs.map((doc) => doc.data());
     const withID = mensajesSnapshot.docs.map((doc) => doc.id);
     console.log(withID);
+    withID.forEach((id) => {
+      console.log(dateTime.fromISO(id).toLocaleString(dateTime.DATETIME_MED));
+    });
     console.log(allMessagesInDB);
 
     allMessagesInDB.forEach((msg, i) => {
@@ -109,6 +116,11 @@ async function getMessages(db) {
 
       let newMsgDiv = document.createElement("div");
       newMsgDiv.className = "msgContainer";
+
+      const time = document.createElement("span");
+      time.textContent = `${dateTime
+        .fromISO(msg.id)
+        .toLocaleString(dateTime.DATETIME_MED)}`;
 
       const name = document.createElement("span");
       name.textContent = `${msg.nombre}`;
@@ -129,6 +141,7 @@ async function getMessages(db) {
       text.textContent = ` ${msg.message}`;
 
       msgContainer.appendChild(newMsgDiv);
+      newMsgDiv.appendChild(time);
       newMsgDiv.appendChild(name);
       newMsgDiv.appendChild(email);
       newMsgDiv.appendChild(checkIn);

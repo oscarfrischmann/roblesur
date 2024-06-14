@@ -419,6 +419,11 @@ figure {
   font-weight: 700;
   cursor: pointer;
 }
+.login__buttons {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
 .login #messages {
   display: flex;
   justify-content: center;
@@ -438,6 +443,10 @@ figure {
 .login .msgContainer span {
   color: antiquewhite;
   font-size: 1.2rem;
+}
+
+#alert input {
+  margin: 5px;
 }
 
 .index__img-principal--desktop {

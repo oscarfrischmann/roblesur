@@ -69,6 +69,8 @@ figure {
   padding: 5px;
   place-self: center;
   margin-bottom: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 #alert button:active {
   box-shadow: 1px 1px 1px;
@@ -498,6 +500,8 @@ figure {
   padding: 5px;
   place-self: start;
   margin: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
 }
 .login .msgContainer button:hover {
   background-color: red;

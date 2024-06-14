@@ -467,11 +467,24 @@ figure {
   align-items: start;
   flex-direction: column;
   border-bottom: 1px solid;
-  padding-bottom: 10px;
+  padding: 10px;
+  width: 90%;
 }
 .login .msgContainer span {
   color: antiquewhite;
   font-size: 1.2rem;
+}
+.login .msgContainer button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px;
+  padding: 5px;
+  place-self: start;
+  margin: 15px;
+}
+.login .msgContainer button:hover {
+  background-color: red;
 }
 
 .index__img-principal--desktop {

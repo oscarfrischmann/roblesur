@@ -40,9 +40,38 @@ figure {
 }
 
 .alert {
+  display: flex;
+  justify-content: center;
   background-color: antiquewhite;
   padding: 10px;
 }
+
+#alert {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  background-color: bisque;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px;
+  padding: 5px;
+}
+
+#alert button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px;
+  padding: 5px;
+  place-self: center;
+  margin-bottom: 15px;
+}
+#alert button:active {
+  box-shadow: 1px 1px 1px;
+}
+#alert input {
+  margin-bottom: -15px;
+}
+
 .swal2-title {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -443,10 +472,6 @@ figure {
 .login .msgContainer span {
   color: antiquewhite;
   font-size: 1.2rem;
-}
-
-#alert input {
-  margin: 5px;
 }
 
 .index__img-principal--desktop {

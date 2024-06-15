@@ -215,6 +215,7 @@ show.addEventListener("click", () => {
     console.log(showModal);
   } else {
     showModal = false;
+    console.log(showModal);
   }
 });
 const changeModal = async (event) => {

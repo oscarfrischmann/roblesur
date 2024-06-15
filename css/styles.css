@@ -3,6 +3,18 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes carefull {
+  0% {
+    background-color: #007bff;
+  }
+  50% {
+    background-color: red;
+  }
+  100% {
+    background-color: #007bff;
+  }
+}
 * {
   margin: 0px;
   padding: 0px;
@@ -35,6 +47,49 @@ p {
 figure {
   margin: 0;
 }
+
+.del-msg {
+  --color: red;
+  font-family: inherit;
+  display: inline-block;
+  width: 6em;
+  height: 2em;
+  line-height: 1.8em;
+  overflow: hidden;
+  margin: 20px;
+  font-size: 17px;
+  z-index: 1;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-radius: 6px;
+  position: relative;
+}
+
+.del-msg::before {
+  position: absolute;
+  content: "";
+  background: var(--color);
+  width: 150px;
+  height: 200px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.del-msg:hover {
+  color: white;
+}
+
+.del-msg:before {
+  top: 100%;
+  left: 100%;
+  transition: 0.3s all;
+}
+
+.del-msg:hover::before {
+  top: -30px;
+  left: -30px;
+}
+
 .show {
   display: none !important;
 }
@@ -81,6 +136,15 @@ figure {
 #alert input,
 #alert textarea {
   margin-bottom: -15px;
+}
+.se__muestra {
+  color: red;
+}
+.form__buttons {
+  margin: 10px auto;
+}
+.animated:hover {
+  animation: 1s infinite carefull;
 }
 
 .swal2-title {
@@ -497,20 +561,6 @@ figure {
 .login .msgContainer span:nth-of-type(7) {
   margin-left: 20px;
   text-transform: capitalize;
-}
-.login .msgContainer button {
-  background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 3px 3px 3px;
-  padding: 5px;
-  place-self: start;
-  margin: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-.login .msgContainer button:hover {
-  background-color: red;
 }
 
 .index__img-principal--desktop {

@@ -32,14 +32,19 @@
 
         <label for="thumbnail">Imagen:</label>
         <input type="text" id="thumbnail" name="thumbnail" required /><br />
-
         <label for="button">texto del boton:</label>
         <input type="text" id="button" name="button" required /><br />
+        <div>
+          <label for="show" class="se__muestra">Se muestra?</label>
+          <input type="checkbox" id="show" name="show" /><br />
+        </div>
 
-        <label for="show">Se muestra?</label>
-        <input type="checkbox" id="show" name="show" /><br />
-
-        <button type="submit" class="realtime__btn">publicar</button>
+        <div class="form__buttons">
+          <button type="button" class="realtime__btn" id="testButton">
+            test
+          </button>
+          <button type="submit" class="realtime__btn animated">publicar</button>
+        </div>
       </form>
     </div>
     <div id="messages"></div>

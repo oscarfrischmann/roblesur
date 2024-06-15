@@ -1,4 +1,4 @@
-import swal from "./modal.js";
+import sweetalert2 from "https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/+esm";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import {
   getAuth,
@@ -11,6 +11,7 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
   doc,
   setDoc,
   deleteDoc,
@@ -27,6 +28,27 @@ const firebaseConfig = initializeApp({
 
 let dateTime = luxon.DateTime;
 const now = dateTime.now().setZone("America/Buenos_Aires").toISO();
+
+//*sweetAlert
+const swal = async function () {
+  try {
+    const fRef = doc(db, `modal_index`, "modal_index");
+    const docSnap = await getDoc(fRef);
+    const modalData = docSnap._document.data.value.mapValue.fields;
+    if (modalData.show.booleanValue) {
+      sweetalert2.fire({
+        titleText: modalData.tittle.stringValue,
+        text: modalData.description.stringValue,
+        confirmButtonText: modalData.button.stringValue,
+        imageUrl: modalData.thumbnail.stringValue,
+        imageWidth: "90%",
+        backdrop: true,
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 // Initialize Firebase
 const auth = getAuth(firebaseConfig);
@@ -151,6 +173,7 @@ async function getMessages(db) {
       newMsgDiv.appendChild(name);
 
       const deleteMsg = document.createElement("button");
+      deleteMsg.className = "del-msg";
       deleteMsg.innerHTML = "Borrar mensaje";
       deleteMsg.setAttribute("data-id", msg.id);
       newMsgDiv.appendChild(deleteMsg);
@@ -196,7 +219,6 @@ show.addEventListener("click", () => {
 });
 const changeModal = async (event) => {
   event.preventDefault();
-  console.log(show);
   const tittle = manageModal["tittle"].value;
   const description = manageModal["text"].value;
   const thumbnail = manageModal["thumbnail"].value;
@@ -210,9 +232,28 @@ const changeModal = async (event) => {
       button: button,
       show: showModal,
     });
-    await swal();
+    swal();
   } catch (err) {
     throw new Error("bla bla", err);
   }
 };
+
+const testModal = (event) => {
+  event.preventDefault();
+  const tittle = manageModal["tittle"].value;
+  const description = manageModal["text"].value;
+  const thumbnail = manageModal["thumbnail"].value;
+  const button = manageModal["button"].value;
+
+  sweetalert2.fire({
+    titleText: tittle,
+    text: description,
+    confirmButtonText: button,
+    imageUrl: thumbnail,
+    imageWidth: "90%",
+    backdrop: true,
+  });
+};
+const test = document.getElementById("testButton");
+test.addEventListener("click", testModal);
 manageModal.addEventListener("submit", changeModal);

@@ -1,3 +1,4 @@
+import sweetalert2 from "https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/+esm";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import {
   getAuth,
@@ -61,13 +62,31 @@ function submitForm(e) {
   };
   (async function () {
     try {
-      await setDoc(doc(db, "contacto", now), contacto).then(
-        console.log("SUCCES!!!!")
-      );
+      await setDoc(doc(db, "contacto", now), contacto);
+      sweetalert2.fire({
+        icon: "success",
+        iconColor: "#3DA564",
+        text: "Mensaje enviado",
+        position: `top-end`,
+        toast: true,
+        showConfirmButton: false,
+        background: "#00FF21",
+      });
+      setTimeout(() => {
+        window.location.href = "../index.html";
+      }, 3000);
     } catch (e) {
+      sweetalert2.fire({
+        icon: "error",
+        iconColor: "#111827",
+        text: "Error",
+        position: `top-end`,
+        toast: true,
+        showConfirmButton: false,
+        background: "#FF4500",
+      });
       console.error("Error adding document: ", e);
     }
-    window.location.href = "../index.html";
   })();
   return contacto;
 }

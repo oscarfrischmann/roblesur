@@ -1,3 +1,4 @@
+import swal from "./modal.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
 import {
   getAuth,
@@ -14,7 +15,6 @@ import {
   setDoc,
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
-
 // Your web app's Firebase configuration
 const firebaseConfig = initializeApp({
   apiKey: "AIzaSyC-Vugn6OZcEOZuRhwO4DcX6jQ1UrPgADM",
@@ -27,12 +27,12 @@ const firebaseConfig = initializeApp({
 
 let dateTime = luxon.DateTime;
 const now = dateTime.now().setZone("America/Buenos_Aires").toISO();
-console.log(now);
-console.log(dateTime.fromISO(now));
+
 // Initialize Firebase
 const auth = getAuth(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(firebaseConfig);
+
 // SIGN IN GOOGLE
 const signInButton = document.getElementById("googleLogIn");
 signInButton.addEventListener("click", () => {
@@ -122,9 +122,6 @@ async function getMessages(db) {
         .fromISO(msg.id)
         .toLocaleString(dateTime.DATETIME_MED)}`;
 
-      const name = document.createElement("span");
-      name.textContent = `${msg.nombre}`;
-
       const email = document.createElement("span");
       email.textContent = ` ${msg.email}`;
 
@@ -140,14 +137,18 @@ async function getMessages(db) {
       const text = document.createElement("span");
       text.textContent = ` ${msg.message}`;
 
+      const name = document.createElement("span");
+      name.textContent = `${msg.nombre.toLowerCase()}`;
+      console.log(typeof msg.nombre);
+
       msgContainer.appendChild(newMsgDiv);
       newMsgDiv.appendChild(time);
-      newMsgDiv.appendChild(name);
       newMsgDiv.appendChild(email);
       newMsgDiv.appendChild(checkIn);
       newMsgDiv.appendChild(checkOut);
       newMsgDiv.appendChild(phoneNumber);
       newMsgDiv.appendChild(text);
+      newMsgDiv.appendChild(name);
 
       const deleteMsg = document.createElement("button");
       deleteMsg.innerHTML = "Borrar mensaje";
@@ -171,13 +172,13 @@ async function getMessages(db) {
     console.error("Error getting documents", e);
   }
 }
-// console.log(getMessages(db));
-const getData = document.getElementById("getData");
 
+const getData = document.getElementById("getData");
 getData.addEventListener("click", () => {
   // getMessages(db).then((result) => console.log(result));
   location.reload();
 });
+
 function deleteMsg(tg) {
   deleteDoc(doc(db, "contacto", tg));
 }
@@ -194,7 +195,6 @@ show.addEventListener("click", () => {
   }
 });
 const changeModal = async (event) => {
-  console.log("hi");
   event.preventDefault();
   console.log(show);
   const tittle = manageModal["tittle"].value;
@@ -202,7 +202,6 @@ const changeModal = async (event) => {
   const thumbnail = manageModal["thumbnail"].value;
   const button = manageModal["button"].value;
 
-  console.log(tittle, description, thumbnail, button, showModal);
   try {
     await setDoc(doc(db, "modal_index", "modal_index"), {
       tittle: tittle,
@@ -211,6 +210,7 @@ const changeModal = async (event) => {
       button: button,
       show: showModal,
     });
+    await swal();
   } catch (err) {
     throw new Error("bla bla", err);
   }

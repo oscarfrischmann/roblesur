@@ -23,18 +23,23 @@
     </div>
     <div class="alert show" id="alertContainer">
       <form id="alert">
-        Titulo:
+        <label for="tittle">Titulo:</label>
         <input type="text" id="tittle" name="tittle" required /><br />
-        Texto:
-        <input type="text" id="description" name="text" required /><br />
-        Imagen:
+
+        <label for="description"> Texto:</label>
+        <textarea type="text" id="description" name="text" required></textarea
+        ><br />
+
+        <label for="thumbnail">Imagen:</label>
         <input type="text" id="thumbnail" name="thumbnail" required /><br />
-        texto del boton:
+
+        <label for="button">texto del boton:</label>
         <input type="text" id="button" name="button" required /><br />
-        Se muestra?
+
+        <label for="show">Se muestra?</label>
         <input type="checkbox" id="show" name="show" /><br />
 
-        <button type="submit" class="realtime__btn">Enviar</button>
+        <button type="submit" class="realtime__btn">publicar</button>
       </form>
     </div>
     <div id="messages"></div>

@@ -22,14 +22,12 @@ import sweetalert2 from "https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/+esm";
 const db = getFirestore(firebaseConfig);
 console.log("modal on");
 
-(async function fireSwal() {
+const swal = async function () {
   try {
     const fRef = doc(db, `modal_index`, "modal_index");
     const docSnap = await getDoc(fRef);
     const modalData = docSnap._document.data.value.mapValue.fields;
-    console.log(modalData);
     if (modalData.show.booleanValue) {
-      console.log(modalData.tittle.stringValue);
       sweetalert2.fire({
         titleText: modalData.tittle.stringValue,
         text: modalData.description.stringValue,
@@ -42,4 +40,8 @@ console.log("modal on");
   } catch (err) {
     throw new Error(err);
   }
-})();
+};
+
+swal();
+
+export default swal;

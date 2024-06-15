@@ -78,7 +78,8 @@ figure {
 #alert button:hover {
   background-color: rgb(152, 234, 152);
 }
-#alert input {
+#alert input,
+#alert textarea {
   margin-bottom: -15px;
 }
 
@@ -476,6 +477,7 @@ figure {
   justify-content: center;
   align-items: start;
   flex-direction: column;
+  gap: 8px;
   border-bottom: 1px solid;
   padding: 10px;
   width: 90%;
@@ -491,6 +493,10 @@ figure {
   color: rgba(0, 0, 0, 0.7607843137);
   padding: 5px;
   border-radius: 10px;
+}
+.login .msgContainer span:nth-of-type(7) {
+  margin-left: 20px;
+  text-transform: capitalize;
 }
 .login .msgContainer button {
   background-color: #007bff;

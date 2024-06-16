@@ -10,6 +10,7 @@
   }
   50% {
     background-color: red;
+    color: whitesmoke;
   }
   100% {
     background-color: #007bff;

@@ -1,60 +1,55 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../css/styles.css" />
-    <script type="module" src="../src/login.js"></script>
 
-    <title>Log In</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <script type="module" src="../src/login.js"></script>
 
-  <body class="login">
-    <div class="login__buttons">
-      <button class="login__button login__button-iniciar" id="googleLogIn">
-        iniciar sesión
-      </button>
-      <button class="login__button login__button-cerrar" id="googleLogOut">
-        cerrar sesión
-      </button>
-      <button class="login__button login__button-get" id="getData">
-        ver mensajes
-      </button>
-    </div>
-    <div class="alert show" id="alertContainer">
-      <form id="alert">
-        <label for="tittle">Titulo:</label>
-        <input type="text" id="tittle" name="tittle" required /><br />
+  <title>Log In</title>
+</head>
 
-        <label for="description"> Texto:</label>
-        <textarea
-          type="text"
-          id="description"
-          name="text"
-          cols="22"
-          required
-        ></textarea
-        ><br />
+<body class="login">
+  <div class="login__buttons">
+    <button class="login__button login__button-iniciar" id="googleLogIn">
+      iniciar sesión
+    </button>
+    <button class="login__button login__button-cerrar" id="googleLogOut">
+      cerrar sesión
+    </button>
+    <button class="login__button login__button-get" id="getData">
+      ver mensajes
+    </button>
+  </div>
+  <div class="alert display-none" id="alertContainer">
+    <form id="alert">
+      <label for="tittle">Titulo:</label>
+      <input type="text" id="tittle" name="tittle" required /><br />
 
-        <label for="thumbnail">URL de la Imagen:</label>
-        <input type="text" id="thumbnail" name="thumbnail" required /><br />
-        <label for="button">Texto del boton:</label>
-        <input type="text" id="button" name="button" required /><br />
-        <div>
-          <label for="show" class="se__muestra">Se muestra?</label>
-          <input type="checkbox" id="show" name="show" /><br />
-        </div>
+      <label for="description"> Texto:</label>
+      <textarea type="text" id="description" name="text" cols="22" required></textarea><br />
 
-        <div class="form__buttons">
-          <button type="button" class="realtime__btn" id="testButton">
-            test
-          </button>
-          <button type="submit" class="realtime__btn animated">publicar</button>
-        </div>
-      </form>
-    </div>
-    <div id="messages"></div>
+      <label for="thumbnail">URL de la Imagen:</label>
+      <input type="text" id="thumbnail" name="thumbnail" required /><br />
+      <label for="button">Texto del boton:</label>
+      <input type="text" id="button" name="button" required /><br />
+      <div>
+        <label for="show" class="se__muestra">Se muestra?</label>
+        <input type="checkbox" id="show" name="show" /><br />
+      </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
-  </body>
+      <div class="form__buttons">
+        <button type="button" class="realtime__btn" id="testButton">
+          test
+        </button>
+        <button type="submit" class="realtime__btn animated">publicar</button>
+      </div>
+    </form>
+  </div>
+  <div id="messages"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.3/build/global/luxon.min.js"></script>
+</body>
+
 </html>

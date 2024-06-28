@@ -273,12 +273,14 @@ figure {
     font-size: 1.2rem;
     background-size: 0px;
     border-radius: 5px;
-    transition: font-size 0.3s, background 1s;
+    transition: color 0.3s, background 1s;
     padding: 8px;
+    text-wrap: nowrap;
   }
 
   .header__navs-pages li:hover {
-    font-size: 1.6rem;
+    color: rgba(150, 100, 50, 1);
+
   }
 
   .header__navs-lang ul {
@@ -302,7 +304,9 @@ figure {
   }
 
   .header__navs-pages li:hover {
-    font-size: 2rem;
+    color: rgba(100, 50, 50, 1);
+
+
   }
 }
 
@@ -313,7 +317,9 @@ figure {
   }
 
   .header__navs-pages li:hover {
-    font-size: 2.5rem;
+    color: rgba(100, 50, 50, 1);
+
+    ;
   }
 }
 

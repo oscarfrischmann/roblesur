@@ -36,7 +36,6 @@ const swal = async function () {
 					imageUrl: modalData.thumbnail.stringValue,
 					imageWidth: '90%',
 					backdrop: true,
-					toast: true,
 				});
 			} else {
 				sweetalert2.fire({

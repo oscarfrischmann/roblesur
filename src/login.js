@@ -16,6 +16,13 @@ import {
 	setDoc,
 	deleteDoc,
 } from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js';
+import {
+	getStorage,
+	ref,
+	uploadBytes,
+	listAll,
+	getDownloadURL,
+} from 'https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js';
 // Your web app's Firebase configuration
 const firebaseConfig = initializeApp({
 	apiKey: 'AIzaSyC-Vugn6OZcEOZuRhwO4DcX6jQ1UrPgADM',
@@ -54,6 +61,66 @@ const swal = async function () {
 const auth = getAuth(firebaseConfig);
 const provider = new GoogleAuthProvider();
 const db = getFirestore(firebaseConfig);
+const storage = getStorage(firebaseConfig);
+const storageRef = ref(storage);
+// console.log(storage);
+// console.log(storageRef);
+
+//UPLOAD FILE STORAGE
+const indexModalImgRef = ref(storage, 'indexModal');
+const file = document.getElementById('file');
+const fileForm = document.getElementById('fileForm');
+fileForm.addEventListener('submit', (e) => {
+	e.preventDefault();
+	const file = document.getElementById('file').files[0];
+	const fileRef = ref(storage, `indexModal/${file.name}`);
+	uploadBytes(fileRef, file)
+		.then((snapshot) => {
+			console.log('Uploaded a blob or file!');
+		})
+		.catch((error) => {
+			console.log('Upload failed:', error);
+		});
+});
+
+const listRef = ref(storage, 'indexModal');
+const imgCont = document.getElementById('images');
+const showImgBtn = document.getElementById('showImages');
+const imgLinks = [];
+showImgBtn.addEventListener('click', async () => {
+	listAll(listRef)
+		.then((res) => {
+			res.prefixes.forEach((folderRef) => {
+				console.log(folderRef);
+			});
+			res.items.forEach((itemRef, i) => {
+				console.log(itemRef.name);
+				getDownloadURL(ref(storage, `indexModal/${itemRef.name}`))
+					.then((url) => {
+						imgLinks.push(url);
+						const imgConteiner = document.createElement('div');
+						imgCont.appendChild(imgConteiner);
+						const image = document.createElement('img');
+						image.src = url;
+						image.style = 'width: 200px;';
+						image.classList = ' mb-3';
+						imgConteiner.appendChild(image);
+						const use = document.createElement('button');
+						use.id = `img${i}`;
+						use.classList = 'btn btn-primary ms-2';
+						use.innerHTML = 'Use';
+						imgConteiner.appendChild(use);
+					})
+					.catch((error) => {
+						console.log(error);
+					});
+			});
+		})
+		.catch((error) => {
+			console.log('Uh-oh, an error occurred!');
+		});
+	getImgButtons();
+});
 
 // SIGN IN GOOGLE
 const signInButton = document.getElementById('googleLogIn');
@@ -107,7 +174,6 @@ signOutButton.addEventListener('click', () => {
 onAuthStateChanged(auth, (user) => {
 	if (user != null) {
 		console.log('User Logged In');
-		console.log(user);
 		const showModalForm = document.getElementById('alertContainer');
 		showModalForm.classList.toggle('display-none');
 		getMessages(db);
@@ -124,14 +190,12 @@ async function getMessages(db) {
 		const mensajes = collection(db, 'contacto');
 
 		const mensajesSnapshot = await getDocs(mensajes);
-		console.log(mensajesSnapshot);
 		allMessagesInDB = mensajesSnapshot.docs.map((doc) => doc.data());
 		const withID = mensajesSnapshot.docs.map((doc) => doc.id);
-		console.log(withID);
 		withID.forEach((id) => {
-			console.log(dateTime.fromISO(id).toLocaleString(dateTime.DATETIME_MED));
+			//console.log(dateTime.fromISO(id).toLocaleString(dateTime.DATETIME_MED));
 		});
-		console.log(allMessagesInDB);
+		// console.log(allMessagesInDB);
 
 		allMessagesInDB.forEach((msg, i) => {
 			msg.id = withID[i];
@@ -159,7 +223,6 @@ async function getMessages(db) {
 
 			const name = document.createElement('span');
 			name.textContent = `${msg.nombre.toLowerCase()}`;
-			console.log(typeof msg.nombre);
 
 			msgContainer.appendChild(newMsgDiv);
 			newMsgDiv.appendChild(time);
@@ -177,7 +240,6 @@ async function getMessages(db) {
 			newMsgDiv.appendChild(deleteMsg);
 		});
 		const deleteButtons = document.querySelectorAll('#messages button ');
-		console.log(deleteButtons);
 		for (let btn of deleteButtons) {
 			btn.addEventListener('click', async ({ target: { dataset } }) => {
 				console.log(dataset);
@@ -256,3 +318,16 @@ const testModal = (event) => {
 const test = document.getElementById('testButton');
 test.addEventListener('click', testModal);
 manageModal.addEventListener('submit', changeModal);
+
+// USE IMG FROM DB
+async function getImgButtons() {
+	setTimeout(() => {
+		const use = document.querySelectorAll('#images button');
+		use.forEach((button, i) => {
+			button.addEventListener('click', (event) => {
+				const img = imgLinks[i];
+				manageModal['thumbnail'].value = img;
+			});
+		});
+	}, 2500);
+}

@@ -24,45 +24,43 @@
       ver mensajes
     </button>
   </div>
+  <div class="d-flex justify-content-center m-auto border p-2 mb-3" style="width: 80%;">
+    <div class="alert display-none" id="alertContainer">
+      <form id="alert">
+        <label for="tittle">Titulo:</label>
+        <input type="text" id="tittle" name="tittle" required /><br />
 
-  <div class="alert display-none" id="alertContainer">
-    <form id="alert">
-      <label for="tittle">Titulo:</label>
-      <input type="text" id="tittle" name="tittle" required /><br />
+        <label for="description"> Texto:</label>
+        <textarea type="text" id="description" name="text" cols="22" required></textarea><br />
 
-      <label for="description"> Texto:</label>
-      <textarea type="text" id="description" name="text" cols="22" required></textarea><br />
-
-      <label for="thumbnail">URL de la Imagen:</label>
-      <input type="text" id="thumbnail" name="thumbnail" id="imgURL" required /><br />
-      <label for="button">Texto del boton:</label>
-      <input type="text" id="button" name="button" required /><br />
-      <div>
-        <label for="show" class="se__muestra">Se muestra?</label>
-        <input type="checkbox" id="show" name="show" /><br />
+        <label for="thumbnail">URL de la Imagen:</label>
+        <input type="text" id="thumbnail" name="thumbnail" id="imgURL" required /><br />
+        <label for="button">Texto del boton:</label>
+        <input type="text" id="button" name="button" required /><br />
+        <div>
+          <label for="show" class="se__muestra">Se muestra?</label>
+          <input type="checkbox" id="show" name="show" /><br />
+        </div>
+        <div class="form__buttons">
+          <button type="button" class="realtime__btn" id="testButton">
+            test
+          </button>
+          <button type="submit" class="realtime__btn animated" id="fileInput">publicar</button>
+        </div>
+      </form>
+    </div>
+    <div class="d-flex flex-column" style="width: 75%;">
+      <div class="fileStorage container display-none">
+        <form action="" id="fileForm" class="">
+          <div class="mb-3 d-flex">
+            <input class="form-control" style="max-width: 500px;" type="file" id="file">
+            <button type="submit" class="btn btn-primary ms-1">enviar</button>
+          </div>
+        </form>
+        <button type="button" id="showImages" class="btn btn-primary m-5">Ver imágenes</button>
       </div>
-
-      <div class="form__buttons">
-        <button type="button" class="realtime__btn" id="testButton">
-          test
-        </button>
-        <button type="submit" class="realtime__btn animated" id="fileInput">publicar</button>
-      </div>
-    </form>
-  </div>
-  <div class="fileStorage container">
-    <form action="" id="fileForm" class="">
-      <div class="mb-3 d-flex">
-        <input class="form-control" style="max-width: 500px;" type="file" id="file">
-        <button type="submit" class="btn btn-primary ms-1">enviar</button>
-      </div>
-      <!-- <input type="file" name="file" id="file" class="file-input"> -->
-
-    </form>
-
-    <button type="button" id="showImages" class="btn btn-primary m-5">Ver imágenes</button>
-
-    <div id="images" class="container d-flex overflow-x-auto mb-3 border-bottom"></div>
+      <div id="images" class="container d-flex overflow-x-auto"></div>
+    </div>
   </div>
   <div id="messages"></div>
 

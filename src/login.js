@@ -102,24 +102,26 @@ showImgBtn.addEventListener("click", async () => {
           .then((url) => {
             imgLinks.push(url);
             const imgConteiner = document.createElement("div");
-
+            imgConteiner.className = "db-imgCont m-1";
             imgCont.appendChild(imgConteiner);
             const image = document.createElement("img");
             image.src = url;
             image.style = "width: 200px;";
-            image.classList = " mb-3";
+            image.classList = "db-img mb-3";
             imgConteiner.appendChild(image);
             const use = document.createElement("button");
             use.id = `img${i}`;
-            use.classList = "btn btn-primary ms-2 use";
+            use.classList = "btn btn-primary m-1 use";
             use.innerHTML = "Usar";
             use.setAttribute("disabled", "");
+            use.style.height = "38px";
             imgConteiner.appendChild(use);
             const deleteImg = document.createElement("button");
             deleteImg.id = `${itemRef.name}`;
-            deleteImg.classList = "btn btn-danger ms-2 delete";
+            deleteImg.classList = "btn btn-danger m-1 delete";
             deleteImg.textContent = "Borrar";
             deleteImg.setAttribute("disabled", "");
+            deleteImg.style.height = "38px";
             imgConteiner.appendChild(deleteImg);
           })
           .catch((error) => {
@@ -184,10 +186,12 @@ signOutButton.addEventListener("click", () => {
 
 // detect auth state
 onAuthStateChanged(auth, (user) => {
+  const files = document.querySelector(".fileStorage");
   if (user != null) {
     console.log("User Logged In");
     const showModalForm = document.getElementById("alertContainer");
     showModalForm.classList.toggle("display-none");
+    files.classList.toggle("display-none");
     getMessages(db);
   } else {
     console.log("No User Logged In");
@@ -196,6 +200,7 @@ onAuthStateChanged(auth, (user) => {
 
 //GET INFO
 const msgContainer = document.getElementById("messages");
+msgContainer.className = "d-flex flex-column align-items-center";
 let allMessagesInDB;
 async function getMessages(db) {
   try {
@@ -213,45 +218,54 @@ async function getMessages(db) {
       msg.id = withID[i];
 
       let newMsgDiv = document.createElement("div");
-      newMsgDiv.className = "msgContainer";
+      newMsgDiv.className = "card";
+      newMsgDiv.style.width = "23rem";
+      let cardBody = document.createElement("div");
+      cardBody.className = "card-body";
 
-      const time = document.createElement("span");
+      const time = document.createElement("h5");
+      time.className = "card-title";
       time.textContent = `${dateTime
         .fromISO(msg.id)
         .toLocaleString(dateTime.DATETIME_MED)}`;
 
-      const email = document.createElement("span");
+      const email = document.createElement("h6");
+      email.className = "card-subtitle mb-2 text-body-secondary";
       email.textContent = ` ${msg.email}`;
 
-      const checkIn = document.createElement("span");
+      const checkIn = document.createElement("h5");
       checkIn.textContent = ` In:   ${msg.checkIn}`;
 
-      const checkOut = document.createElement("span");
+      const checkOut = document.createElement("h5");
       checkOut.textContent = ` Out:   ${msg.checkOut}`;
 
-      const phoneNumber = document.createElement("span");
+      const phoneNumber = document.createElement("h5");
+      phoneNumber.className = "card-subtitle mb-2 text-body-secondary";
       phoneNumber.textContent = ` ${msg.phoneNumber}`;
 
-      const text = document.createElement("span");
+      const text = document.createElement("p");
+      text.className = "card-text";
       text.textContent = ` ${msg.message}`;
 
-      const name = document.createElement("span");
+      const name = document.createElement("h5");
+      name.className = "card-subtitle mb-2 text-body-secondary";
       name.textContent = `${msg.nombre.toLowerCase()}`;
 
       msgContainer.appendChild(newMsgDiv);
-      newMsgDiv.appendChild(time);
-      newMsgDiv.appendChild(email);
-      newMsgDiv.appendChild(checkIn);
-      newMsgDiv.appendChild(checkOut);
-      newMsgDiv.appendChild(phoneNumber);
-      newMsgDiv.appendChild(text);
-      newMsgDiv.appendChild(name);
+      newMsgDiv.appendChild(cardBody);
+      cardBody.appendChild(time);
+      cardBody.appendChild(text);
+      cardBody.appendChild(name);
+      cardBody.appendChild(email);
+      cardBody.appendChild(phoneNumber);
+      cardBody.appendChild(checkIn);
+      cardBody.appendChild(checkOut);
 
       const deleteMsg = document.createElement("button");
       deleteMsg.className = "del-msg";
       deleteMsg.innerHTML = "Borrar mensaje";
       deleteMsg.setAttribute("data-id", msg.id);
-      newMsgDiv.appendChild(deleteMsg);
+      cardBody.appendChild(deleteMsg);
     });
     const deleteButtons = document.querySelectorAll("#messages button ");
     for (let btn of deleteButtons) {

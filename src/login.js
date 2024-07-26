@@ -1,12 +1,12 @@
 import sweetalert2 from "https://cdn.jsdelivr.net/npm/sweetalert2@11.11.1/+esm";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.4/firebase-app.js";
 import {
   getAuth,
   onAuthStateChanged,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-auth.js";
 import {
   getFirestore,
   collection,
@@ -15,7 +15,7 @@ import {
   doc,
   setDoc,
   deleteDoc,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-firestore.js";
 import {
   getStorage,
   ref,
@@ -23,20 +23,20 @@ import {
   listAll,
   getDownloadURL,
   deleteObject,
-} from "https://www.gstatic.com/firebasejs/10.5.0/firebase-storage.js";
+} from "https://www.gstatic.com/firebasejs/10.12.4/firebase-storage.js";
 // Your web app's Firebase configuration
-const firebaseConfig = initializeApp({
+const firebaseConfig = {
   apiKey: "AIzaSyC-Vugn6OZcEOZuRhwO4DcX6jQ1UrPgADM",
   authDomain: "hosteria-roblesur.firebaseapp.com",
   projectId: "hosteria-roblesur",
   storageBucket: "hosteria-roblesur.appspot.com",
   messagingSenderId: "587587113540",
   appId: "1:587587113540:web:98f34cdf522d748b9ce211",
-});
-
+  measurementId: "G-H0SWB98NYL",
+};
+const app = initializeApp(firebaseConfig);
 let dateTime = luxon.DateTime;
 const now = dateTime.now().setZone("America/Buenos_Aires").toISO();
-
 //*sweetAlert
 const swal = async function () {
   try {
@@ -59,10 +59,10 @@ const swal = async function () {
 };
 
 // Initialize Firebase
-const auth = getAuth(firebaseConfig);
+const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-const db = getFirestore(firebaseConfig);
-const storage = getStorage(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
 const storageRef = ref(storage);
 // console.log(storage);
 // console.log(storageRef);
@@ -229,9 +229,10 @@ async function getMessages(db) {
         .fromISO(msg.id)
         .toLocaleString(dateTime.DATETIME_MED)}`;
 
-      const email = document.createElement("h6");
+      const email = document.createElement("a");
       email.className = "card-subtitle mb-2 text-body-secondary";
       email.textContent = ` ${msg.email}`;
+      email.setAttribute("href", `mailto:${msg.email}`);
 
       const checkIn = document.createElement("h5");
       checkIn.textContent = ` In:   ${msg.checkIn}`;

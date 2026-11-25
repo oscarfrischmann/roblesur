@@ -1,14 +1,20 @@
-// BORRADOR: reemplazar ADMIN_EMAIL y publicar desde la consola de Firebase.
+// BORRADOR: publicar desde la consola de Firebase (Storage > Reglas).
+// Revisá si tus reglas actuales de Storage dan otros permisos antes de reemplazarlas.
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
+    function isAdmin() {
+      return request.auth != null
+        && (request.auth.uid == 'OG3oQz8E4LgSZ39BhYcmyJuvfhx1'
+          || request.auth.uid == 'HHWKoSTJIrV7cSSGmhevSRWBhB33');
+    }
+
     match /indexModal/{file} {
       allow read: if true;
-      allow create, update: if request.auth != null
-        && request.auth.token.email == 'ADMIN_EMAIL'
+      allow create, update: if isAdmin()
         && request.resource.size < 5 * 1024 * 1024
         && request.resource.contentType.matches('image/.*');
-      allow delete: if request.auth != null && request.auth.token.email == 'ADMIN_EMAIL';
+      allow delete: if isAdmin();
     }
   }
 }

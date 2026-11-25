@@ -1,0 +1,17 @@
+# Redirecciones de las URLs del sitio anterior (solo Apache).
+RewriteEngine On
+
+RewriteRule ^pages/nosotros\.html$    /nosotros.html    [R=301,L]
+RewriteRule ^pages/la_hosteria\.html$ /la_hosteria.html [R=301,L]
+RewriteRule ^pages/contacto\.html$    /contacto.html    [R=301,L]
+RewriteRule ^pages/ubicacion\.html$   /ubicacion.html   [R=301,L]
+RewriteRule ^pages/fotos\.html$       /fotos.html       [R=301,L]
+RewriteRule ^pages/login\.html$       /admin.html       [R=301,L]
+RewriteRule ^index\.html$             /                 [R=301,L]
+
+# Los archivos con hash de /_astro/ no cambian nunca: caché de 1 año.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

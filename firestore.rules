@@ -1,15 +1,18 @@
-// BORRADOR: revisar y publicar desde la consola de Firebase (no se despliega solo).
-// Reemplazar ADMIN_EMAIL por la cuenta de Google que administra el sitio.
+// BORRADOR basado en las reglas actuales de producción. Se publica a mano en la consola de Firebase.
+// Mantiene los dos roles que ya existen:
+//   OWNER  (OG3o...): lee y borra mensajes, edita el modal.
+//   EDITOR (HHWK...): lee mensajes (sin borrar) y edita el modal.
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    function isAdmin() {
-      return request.auth != null
-        && request.auth.token.email == 'ADMIN_EMAIL'
-        && request.auth.token.email_verified == true;
+    function isOwner() {
+      return request.auth != null && request.auth.uid == 'OG3oQz8E4LgSZ39BhYcmyJuvfhx1';
+    }
+    function isEditor() {
+      return request.auth != null && request.auth.uid == 'HHWKoSTJIrV7cSSGmhevSRWBhB33';
     }
 
-    // Formulario público: cualquiera crea, solo el admin lee o borra.
+    // Formulario público: cualquiera crea (con los campos esperados), solo admins leen.
     match /contacto/{id} {
       allow create: if request.resource.data.keys().hasOnly(
           ['nombre', 'checkIn', 'checkOut', 'email', 'phoneNumber', 'message', 'check'])
@@ -17,14 +20,14 @@ service cloud.firestore {
         && request.resource.data.message.size() < 3000
         && request.resource.data.email is string
         && request.resource.data.email.size() < 200;
-      allow read, delete: if isAdmin();
-      allow update: if false;
+      allow get, list: if isOwner() || isEditor();
+      allow update, delete: if isOwner();
     }
 
-    // Modal de portada: lectura pública, escritura solo admin.
+    // Modal de portada: lectura pública, escritura de los dos admins.
     match /modal_index/{id} {
       allow read: if true;
-      allow write: if isAdmin();
+      allow write: if isOwner() || isEditor();
     }
 
     // Contador de clics del modal: público, pero solo puede subir de a 1.
@@ -34,6 +37,7 @@ service cloud.firestore {
         && request.resource.data.visits == resource.data.visits + 1;
     }
 
+    // Todo lo demás cerrado (la colección Users ya no se usa en el panel nuevo).
     match /{document=**} {
       allow read, write: if false;
     }

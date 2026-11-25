@@ -341,7 +341,6 @@ figure {
 
 .footer__titulos {
   grid-column: 1/2;
-  background-color: rgba(232, 231, 221, 0.4666666667);
 }
 
 .footer__titulos h1 {
@@ -395,7 +394,6 @@ figure {
 .footer__ubicacion {
   padding-bottom: 5vh;
   grid-row: 2/3;
-  background-color: rgba(232, 231, 221, 0.4666666667);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -446,13 +444,14 @@ figure {
 .footer__copyright--mobil {
   text-align: center;
   font-size: 0.7rem;
-  background-color: rgba(232, 231, 221, 0.4666666667);
   padding: 10px;
 }
 
 .footer__copyright--desktop {
   display: none;
 }
+
+
 
 @media (min-width: 992px) {
   .footer {
@@ -483,7 +482,6 @@ figure {
     justify-content: center;
     align-items: initial;
     flex-direction: inherit;
-    background-color: rgba(232, 231, 221, 0.5843137255);
     height: 270px;
     font-size: 1.5rem;
     padding-left: 5px;
@@ -514,7 +512,6 @@ figure {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: rgba(232, 231, 221, 0.5843137255);
     height: 270px;
     font-size: 1.4rem;
     line-height: 2.5rem;
@@ -1094,7 +1091,13 @@ figure {
   border-style: solid;
   height: 40px;
   width: 100%;
+  padding-left: 5px;
 }
+
+.reservas textarea {
+  padding-left: 5px;
+}
+
 
 .reservas__botones,
 .reservas__checkbox {

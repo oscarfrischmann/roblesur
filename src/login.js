@@ -252,6 +252,12 @@ async function getMessages(db) {
       name.className = "card-subtitle mb-2 text-body-secondary";
       name.textContent = `${msg.nombre.toLowerCase()}`;
 
+      const check = document.createElement("p");
+      if (msg.check === "true") {
+        check.textContent = "Quiero que me llamen.";
+      } else {
+        check.textContent = "No me llamen, escríbanme.";
+      }
       msgContainer.appendChild(newMsgDiv);
       newMsgDiv.appendChild(cardBody);
       cardBody.appendChild(time);
@@ -261,6 +267,7 @@ async function getMessages(db) {
       cardBody.appendChild(phoneNumber);
       cardBody.appendChild(checkIn);
       cardBody.appendChild(checkOut);
+      cardBody.appendChild(check);
 
       const deleteMsg = document.createElement("button");
       deleteMsg.className = "del-msg";

@@ -42,16 +42,28 @@ const analytics = getAnalytics(app);
 //   }
 // });
 
+const checked = document.getElementById("checkbox");
+checked.value = false;
+checked.addEventListener("click", () => {
+  if (checked.checked) {
+    checked.value = true;
+    console.log(checked.value);
+  } else {
+    checked.value = false;
+    console.log(checked.value);
+  }
+});
 function submitForm(e) {
+  e.preventDefault();
   const now = dateTime.now().setZone("America/Buenos_Aires").toISO();
 
-  e.preventDefault();
   const name = contactForm["nombre"].value;
   const checkIn = contactForm["checkIn"].value;
   const checkOut = contactForm["checkOut"].value;
   const email = contactForm["email"].value;
   const phoneNumber = contactForm["phoneNumber"].value;
   const text = contactForm["text"].value;
+  const checkbox = checked.value;
 
   const contacto = {
     nombre: name,
@@ -60,6 +72,7 @@ function submitForm(e) {
     email: email,
     phoneNumber: phoneNumber,
     message: text,
+    check: checkbox,
   };
   (async function () {
     try {
@@ -93,18 +106,5 @@ function submitForm(e) {
 }
 const contactForm = document.getElementById("contactForm");
 if (contactForm) contactForm.addEventListener("submit", submitForm);
-
-const checked = document.getElementById("checkbox");
-if (checked) {
-  checked.addEventListener("click", () => {
-    if (checked.checked) {
-      checked.value = true;
-      console.log(checked.value);
-    } else {
-      checked.value = false;
-      console.log(checked.value);
-    }
-  });
-}
 
 //* Holaindex

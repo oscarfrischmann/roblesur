@@ -1,0 +1,169 @@
+.del-msg {
+  --color: red;
+  font-family: inherit;
+  display: inline-block;
+  width: 6em;
+  height: 2em;
+  line-height: 1.8em;
+  overflow: hidden;
+  margin: 20px;
+  font-size: 17px;
+  z-index: 1;
+  color: var(--color);
+  border: 2px solid var(--color);
+  border-radius: 6px;
+  position: relative;
+}
+
+.del-msg::before {
+  position: absolute;
+  content: "";
+  background: var(--color);
+  width: 150px;
+  height: 200px;
+  z-index: -1;
+  border-radius: 50%;
+}
+
+.del-msg:hover {
+  color: white;
+}
+
+.del-msg:before {
+  top: 100%;
+  left: 100%;
+  transition: 0.3s all;
+}
+
+.del-msg:hover::before {
+  top: -30px;
+  left: -30px;
+}
+
+/* .show {
+  display: none !important;
+} */
+
+.alert {
+  display: flex;
+  justify-content: center;
+  background: rgb(61, 61, 61);
+
+  padding: 10px;
+}
+
+#alert {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  background-color: bisque;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px;
+  padding: 5px;
+}
+
+#alert button {
+  background-color: var(--color-accent);
+  border: none;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px;
+  padding: 5px;
+  place-self: center;
+  margin-bottom: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+#alert button:active {
+  box-shadow: 1px 1px 1px;
+}
+
+#alert button:hover {
+  background-color: rgb(152, 234, 152);
+}
+
+#alert input,
+#alert textarea {
+  margin-bottom: -15px;
+}
+
+.se__muestra {
+  color: red;
+}
+
+.form__buttons {
+  margin: 10px auto;
+}
+
+.animated:hover {
+  animation: 1s infinite carefull;
+}
+
+.db-imgCont {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr, 1fr;
+}
+
+.db-img {
+  grid-column: 1/3;
+}
+
+.login {
+  background: rgba(0, 0, 0, 0.7607843137);
+}
+
+.login__button {
+  text-transform: uppercase;
+  padding: 10px;
+  margin: 10px;
+  background-color: rgb(184, 169, 169);
+  border-radius: 10px;
+  color: azure;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.login__buttons {
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+.login #messages {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column-reverse;
+  gap: 50px;
+  padding-left: 50px;
+}
+
+.login .msgContainer {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid whitesmoke;
+  padding: 10px;
+  width: 90%;
+}
+
+.login .msgContainer span {
+  color: antiquewhite;
+  font-size: 1.2rem;
+}
+
+.login .msgContainer span:nth-of-type(1) {
+  /* place-self: end; */
+  background-color: antiquewhite;
+  color: rgba(0, 0, 0, 0.7607843137);
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.login .msgContainer span:nth-of-type(7) {
+  margin-left: 20px;
+  text-transform: capitalize;
+}

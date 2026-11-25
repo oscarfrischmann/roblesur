@@ -1,0 +1,136 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: initial;
+  flex-direction: row;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  z-index: 1;
+}
+
+.header__logo img {
+  width: 150px;
+  padding: 8px 20px;
+}
+
+.header__navs-pages {
+  display: none;
+}
+
+.header__navs-lang ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.header__navs {
+  place-self: center;
+}
+
+.header__burger {
+  place-self: center;
+}
+
+.header__burger--img {
+  width: 50px;
+  height: 40px;
+}
+
+#dropdownMenuButtonLight {
+  background-color: white;
+  border: none;
+}
+
+.dropdown-menu {
+  font-size: 1.5rem;
+  width: 25%;
+}
+
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  .header__burger {
+    display: none;
+  }
+
+  .header__logo img {
+    width: unset;
+  }
+
+  .header__navs {
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
+    flex-direction: inherit;
+    gap: 30px;
+  }
+
+  .header__navs-pages {
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
+    flex-direction: inherit;
+    gap: 2px;
+  }
+
+  .header__navs-pages li {
+    font-size: 1.2rem;
+    background-size: 0px;
+    border-radius: 5px;
+    transition: color 0.3s, background 1s;
+    padding: 8px;
+    text-wrap: nowrap;
+  }
+
+  .header__navs-pages li:hover {
+    color: rgba(150, 100, 50, 1);
+
+  }
+
+  .header__navs-lang ul {
+    display: flex;
+    justify-content: inherit;
+    align-items: center;
+    flex-direction: column;
+    gap: initial;
+    margin-right: 30px;
+  }
+
+  .active {
+    background-color: rgba(232, 231, 221, 0.4666666667);
+  }
+}
+
+@media (min-width: 768px) and (min-width: 992px) {
+  .header__navs-pages li {
+    font-size: 1.5rem;
+    padding: 15px;
+  }
+
+  .header__navs-pages li:hover {
+    color: rgba(100, 50, 50, 1);
+
+
+  }
+}
+
+@media (min-width: 768px) and (min-width: 1296px) {
+  .header__navs-pages li {
+    font-size: 2rem;
+    padding: 23px;
+  }
+
+  .header__navs-pages li:hover {
+    color: rgba(100, 50, 50, 1);
+
+    ;
+  }
+}

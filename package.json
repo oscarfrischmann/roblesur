@@ -15,7 +15,6 @@
     "bootstrap": "^5.3.9",
     "bootstrap-icons": "^1.13.2",
     "firebase": "^13.4.0",
-    "flag-icons": "^7.6.0",
     "sweetalert2": "^11.26.26"
   }
 }

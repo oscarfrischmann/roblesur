@@ -343,7 +343,7 @@ figure {
   grid-column: 1/2;
 }
 
-.footer__titulos h1 {
+.footer__titulos .footer__nombre {
   font-family: dearJoe;
   text-align: center;
   font-size: 4rem;
@@ -352,7 +352,7 @@ figure {
   margin: 2rem 0 0 0;
 }
 
-.footer__titulos h2 {
+.footer__titulos .titulo__secundario--footer {
   text-align: center;
   font-weight: normal;
   font-size: 2rem;
@@ -655,6 +655,12 @@ figure {
   left: -371px;
   height: 90vh;
   object-fit: cover;
+}
+
+@media (orientation: landscape) {
+  .index__img-principal--mobile {
+    left: 0;
+  }
 }
 
 .index div {
@@ -1138,7 +1144,7 @@ figure {
   }
 
   .reservas__img {
-    background-image: url(../img/26.jpg);
+    background-image: url(/img/26.jpg);
     background-position: 39% 50%;
     background-size: 1700px;
     width: 554px;

@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Hostería Roble Sur | El Calafate, Patagonia"
+  description="Descubre el destino definitivo en Patagonia. Descubre los glaciares y lagos, disfruta de exquisita gastronomía y experimenta una cálida hospitalidad. Descansa en habitaciones cómodas con vistas impresionantes."
+>
+  <main class="index">
+    <h1 class="visually-hidden">Hostería Roble Sur, El Calafate, Patagonia</h1>
+    <div class="contenedor__full-widt">
+      <img
+        class="index__img-principal--mobile"
+        src="/img/26.jpg"
+        alt="Foto nocturna de la Hostería Roble Sur"
+        fetchpriority="high"
+      />
+      <img
+        class="index__img-principal--desktop img__full-width"
+        src="/img/26.jpg"
+        alt="Foto nocturna de la Hostería Roble Sur"
+        fetchpriority="high"
+      />
+    </div>
+  </main>
+
+  <script>
+    import { initModal } from '../lib/home-modal';
+    initModal();
+  </script>
+</Layout>

@@ -1,0 +1,41 @@
+// BORRADOR: revisar y publicar desde la consola de Firebase (no se despliega solo).
+// Reemplazar ADMIN_EMAIL por la cuenta de Google que administra el sitio.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email == 'ADMIN_EMAIL'
+        && request.auth.token.email_verified == true;
+    }
+
+    // Formulario público: cualquiera crea, solo el admin lee o borra.
+    match /contacto/{id} {
+      allow create: if request.resource.data.keys().hasOnly(
+          ['nombre', 'checkIn', 'checkOut', 'email', 'phoneNumber', 'message', 'check'])
+        && request.resource.data.message is string
+        && request.resource.data.message.size() < 3000
+        && request.resource.data.email is string
+        && request.resource.data.email.size() < 200;
+      allow read, delete: if isAdmin();
+      allow update: if false;
+    }
+
+    // Modal de portada: lectura pública, escritura solo admin.
+    match /modal_index/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Contador de clics del modal: público, pero solo puede subir de a 1.
+    match /counter/visits {
+      allow read: if true;
+      allow update: if request.resource.data.keys().hasOnly(['visits'])
+        && request.resource.data.visits == resource.data.visits + 1;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,64 @@
+---
+import { site, nav } from '../config/site';
+
+// Los íconos conservan los archivos originales; el destino real de cada uno
+// es el que ya usaba producción (facebook, whatsapp, instagram, tripadvisor).
+const social = [
+  { href: site.social.facebook, img: '/img/facebook_icons.jpg', label: 'Facebook', item: true },
+  { href: site.whatsapp.href, img: '/img/twitter_icons.jpg', label: 'WhatsApp', item: false },
+  { href: site.social.instagram, img: '/img/instagram_icons.jpg', label: 'Instagram', item: true },
+  { href: site.social.tripadvisor, img: '/img/telegram_icons.jpg', label: 'TripAdvisor', item: false },
+];
+---
+
+<footer class="footer">
+  <section class="footer__titulos">
+    <p class="footer__nombre">{site.shortName}</p>
+    <p class="titulo__secundario--footer">{site.tagline}</p>
+    <hr class="footer__divisor" />
+  </section>
+  <div class="footer__navs">
+    <ul class="ul-nav">
+      {nav.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+    </ul>
+  </div>
+  <div class="footer__media-icons">
+    <h3>Seguinos en</h3>
+    <ul>
+      {social.map((s) => (
+        <li class:list={[{ 'footer__media-icons--item': s.item }]}>
+          <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+            <img src={s.img} alt={s.label} loading="lazy" />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+  <div class="footer__contact">
+    <h3>Contacto</h3>
+    <ul class="footer__contact-list--index">
+      <li><i class="bi bi-telephone"></i><span>{site.phone}</span></li>
+      <li>
+        <i class="bi bi-whatsapp"></i>
+        <span><a href={site.whatsapp.href} target="_blank" rel="noopener noreferrer">{site.whatsapp.display}</a></span>
+      </li>
+      <li>
+        <i class="bi bi-envelope-at"></i>
+        <span><a href={`mailto:${site.email}`}>{site.email}</a></span>
+      </li>
+    </ul>
+  </div>
+  <div class="footer__ubicacion">
+    <h3>Ubicación</h3>
+    <div class="footer__map--index">
+      <img class="footer__img" src="/img/mapa_footer--cuadrado.png" alt="Mapa de ubicación" loading="lazy" />
+      <div class="footer__map--index2"></div>
+    </div>
+    <p class="footer__adress--index">
+      {site.address.map((line, i) => (<>{line}{i < site.address.length - 1 && <br />}</>))}
+    </p>
+  </div>
+  <p class="footer__copyright--mobil">{site.author}<i class="bi bi-c-circle"></i></p>
+  <p class="footer__copyright--desktop">{site.author}<i class="bi bi-c-circle"></i></p>
+  <div class="footer__space--mobil"></div>
+</footer>

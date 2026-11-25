@@ -1,0 +1,41 @@
+---
+import { nav } from '../config/site';
+
+const current = Astro.url.pathname.replace(/\/$/, '');
+const isActive = (href: string) => current === href.replace(/\.html$/, '') || current === href;
+---
+
+<header class="header">
+  <div class="header__logo">
+    <a href="/"><img src="/img/logo.jpg" alt="Logo Hostería Roble Sur" /></a>
+  </div>
+  <section class="header__navs">
+    <nav>
+      <ul class="header__navs-pages">
+        {nav.map((item) => (
+          <li class:list={[{ active: isActive(item.href) }]}><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+  </section>
+  <div class="header__burger">
+    <div class="dropdown" data-bs-theme="light">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButtonLight"
+        data-bs-toggle="dropdown"
+        aria-expanded="false"
+        aria-label="Abrir menú"
+      >
+        <img class="header__burger--img" src="/img/menu_boton.png" alt="" />
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButtonLight">
+        <li><a class="dropdown-item" href="/">Home</a></li>
+        {nav.map((item) => (
+          <li><a class:list={['dropdown-item', { active: isActive(item.href) }]} href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</header>

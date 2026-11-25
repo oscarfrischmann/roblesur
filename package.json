@@ -1,0 +1,21 @@
+{
+  "name": "roblesur",
+  "type": "module",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "animate.css": "^4.1.1",
+    "aos": "^2.3.4",
+    "astro": "^7.4.13",
+    "bootstrap": "^5.3.9",
+    "bootstrap-icons": "^1.13.2",
+    "firebase": "^13.4.0",
+    "flag-icons": "^7.6.0",
+    "sweetalert2": "^11.26.26"
+  }
+}

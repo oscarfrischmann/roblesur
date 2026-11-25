@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Admin | Roble Sur" description="Panel de administración" chrome={false} noindex>
+  <div class="login">
+    <div class="login__buttons">
+      <button class="login__button login__button-iniciar" id="signIn">iniciar sesión</button>
+      <button class="login__button login__button-cerrar" id="signOutBtn" hidden>cerrar sesión</button>
+      <button class="login__button login__button-get" id="reload" hidden>ver mensajes</button>
+    </div>
+
+    <div id="panel" hidden>
+      <div class="d-flex justify-content-center m-auto border p-2 mb-3" style="width: 80%">
+        <div class="alert" id="alertContainer">
+          <form id="modalForm">
+            <label for="tittle">Titulo:</label>
+            <input type="text" id="tittle" name="tittle" required /><br />
+            <label for="description">Texto:</label>
+            <textarea id="description" name="text" cols="22" required></textarea><br />
+            <label for="thumbnail">URL de la Imagen:</label>
+            <input type="text" id="thumbnail" name="thumbnail" required /><br />
+            <label for="button">Texto del boton:</label>
+            <input type="text" id="button" name="button" required /><br />
+            <div>
+              <label for="show" class="se__muestra">Se muestra?</label>
+              <input type="checkbox" id="show" name="show" /><br />
+            </div>
+            <div class="form__buttons">
+              <button type="button" class="realtime__btn" id="testButton">test</button>
+              <button type="submit" class="realtime__btn animated">publicar</button>
+            </div>
+          </form>
+        </div>
+        <div class="d-flex flex-column" style="width: 75%">
+          <div class="container">
+            <form id="fileForm" class="mb-3 d-flex">
+              <input class="form-control" style="max-width: 500px" type="file" id="file" accept="image/*" required />
+              <button type="submit" class="btn btn-primary ms-1">enviar</button>
+            </form>
+            <button type="button" id="showImages" class="btn btn-primary m-5">Ver imágenes</button>
+          </div>
+          <div id="images" class="container d-flex overflow-x-auto"></div>
+        </div>
+      </div>
+      <div id="messages" class="d-flex flex-column align-items-center"></div>
+    </div>
+  </div>
+
+  <script>
+    import { initAdmin } from '../lib/admin';
+    initAdmin();
+  </script>
+</Layout>
